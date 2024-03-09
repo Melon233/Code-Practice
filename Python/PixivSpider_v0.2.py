@@ -6,6 +6,8 @@ import os
 import random
 
 """
+Version 0.2:
+    1.enhance code's robustness and anti-spider antier
 Demand Analysis:
     1.get and save all the pictures of daily rank in the date range you enter
     2.download all the pictures in your favorite
