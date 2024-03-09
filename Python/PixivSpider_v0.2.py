@@ -6,8 +6,6 @@ import os
 import random
 
 """
-Version log:
-    1.enhance code's robustness and anti-spider antier
 Demand Analysis:
     1.get and save all the pictures of daily rank in the date range you enter
     2.download all the pictures in your favorite
@@ -50,10 +48,11 @@ def getRank():
         os.chdir(path)
         rankPageUrl = "https://www.pixiv.net/ranking.php?mode=daily&date=" + str(date)  # get html text of rankpage
         rankPageResponse = requests.get(url=rankPageUrl, headers=Headers, proxies=Proxies)
-        if rankPageResponse.status_code == 404:
+        if rankPageResponse.status_code != 200:
             continue
-        datePids = re.findall("https://i.pximg.net/c/240x480/img-master/img/([\d+/]*?)(?:_p0)?_master1200.jpg", rankPageResponse)  # match pictures' dates and pids
-        titles = re.findall('data-title="(.*?)"', rankPageResponse)  # match titles
+        rankPageHtml = rankPageResponse.text
+        datePids = re.findall("https://i.pximg.net/c/240x480/img-master/img/([\d+/]*?)(?:_p0)?_master1200.jpg", rankPageHtml)  # match pictures' dates and pids
+        titles = re.findall('data-title="(.*?)"', rankPageHtml)  # match titles
         for i in range(len(titles)):  # make titles legal
             titles[i] = titles[i].replace("/", "-")
             titles[i] = titles[i].replace("*", "-")
