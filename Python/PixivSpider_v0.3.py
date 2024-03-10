@@ -3,8 +3,9 @@ import time
 import re
 from tqdm import tqdm
 import os
-import random
 import json
+import random
+
 
 """
 Version 0.3:
