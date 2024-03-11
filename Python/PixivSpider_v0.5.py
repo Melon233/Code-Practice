@@ -1,5 +1,4 @@
 import requests
-import time
 import re
 from tqdm import tqdm
 import os
